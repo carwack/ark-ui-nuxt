@@ -1,7 +1,9 @@
-import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
+import { addComponent, defineNuxtModule, addImportsSources } from '@nuxt/kit'
+import * as ArkUI from '@ark-ui/vue'
 import { name, version } from '../package.json'
 
 // Module options TypeScript interface definition
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
@@ -9,13 +11,33 @@ export default defineNuxtModule<ModuleOptions>({
     name,
     version,
     configKey: 'arkUINuxt',
+    compatibility: {
+      nuxt: '^3.13.2',
+    },
   },
   // Default configuration options of the Nuxt module
   defaults: {},
   setup(_options, _nuxt) {
-    const resolver = createResolver(import.meta.url)
+    for (const [name] of Object.entries(ArkUI)) {
+      if (name[0] === name[0].toUpperCase()) {
+        // Only add components that start with a capital letter
+        addComponent({
+          name,
+          export: name,
+          filePath: '@ark-ui/vue',
+        })
+      }
+    }
 
-    // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    addPlugin(resolver.resolve('./runtime/plugin'))
+    // Add imports for the utils.
+    addImportsSources({
+      from: '@ark-ui/vue',
+      imports: [
+        'useEmitAsProps',
+        'useForwardProps',
+        'useForwardPropsEmits',
+        'useForwardExpose',
+      ],
+    })
   },
 })
