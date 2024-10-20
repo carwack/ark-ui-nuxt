@@ -4,5 +4,7 @@
   "initialVersions": {
     "ark-ui-nuxt": "0.0.1"
   },
-  "changesets": []
+  "changesets": [
+    "honest-suits-promise"
+  ]
 }
