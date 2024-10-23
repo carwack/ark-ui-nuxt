@@ -1,6 +1,6 @@
 {
   "name": "ark-ui-nuxt",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "Nuxt module for Ark UI",
   "repository": "carwack/ark-ui-nuxt",
   "license": "MIT",

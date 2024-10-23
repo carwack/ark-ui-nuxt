@@ -5,6 +5,7 @@
     "ark-ui-nuxt": "0.0.1"
   },
   "changesets": [
-    "honest-suits-promise"
+    "honest-suits-promise",
+    "twelve-pianos-bathe"
   ]
 }
